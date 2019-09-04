@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>菜鸟教程(runoob.com)</title>
+    <style>
+        #demo {
+            line-height: 50px;
+        }
+        .father {
+            background-color: #bfa;
+            /*float: left;*/
+            /*overflow: hidden;*/
+            /*position: absolute;*/
+            /*border: 1px solid red;*/
+        }
+        /*.father::before {*/
+            /*content: '';*/
+            /*display: table;*/
+            /*clear: both;*/
+        /*}*/
+        .son {
+            margin-top: 50px;
+            margin-bottom: 80px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="father">
+    <div class="son">son</div>
+    <div class="son">son</div>
+    <div class="son">son</div>
+    <button>btn1</button>
+    <button>btn2</button>
+    <img src="" alt="">
+    <input type="text">
+</div>
+
+<script>
+
+    function cb(res) {
+        console.log(JSON.stringify(res, null, 2));
+    }
+
+    var script = document.createElement('script')
+    script.src = 'http://www.test.com?name=you&callback=cb'
+    document.querySelector("head").appendChild(script)
+</script>
+
+</body>
+</html>

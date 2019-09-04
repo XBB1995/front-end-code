@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>外边距折叠</title>
+    <style>
+        * {
+            margin: 0;
+        }
+        .all {
+            overflow: hidden;
+        }
+        div.up {
+            width: 100px;
+            height: 100px;
+            background: #74B9A8;
+            margin-bottom: 100px;
+            /*overflow: hidden; */
+            /* 不可以避免折叠 */
+            /*display: inline-block;*/
+            /* 可以避免 */
+            /* 不发生折叠的触发因素是浮动元素、inline-block 元素、绝对定位元素, 这个只是创建BFC因素的子集, 但并不能说明创建了BFC的元素就不会发生折叠, 因为BFC还可以用overflow:hidden来创建。相反如果父元素形成了BFC, 那么他的块级子元素之间反而会发生折叠。 */
+        }
+
+        div.down {
+            width: 50px;
+            height: 50px;
+            background: #FD0;
+            margin-top: 50px;
+            margin-bottom: 100px;
+        }
+
+        div.outter {
+            width: 200px;
+            height: 200px;
+            background: #685D6A;
+            margin-top: 200px;
+            padding: 1px;
+            /*border: 5px solid #000;*/
+            /*box-sizing: border-box;*/
+             /*overflow: hidden;*/
+            /* 可以避免 */
+            /* 形成BFC既可避免与其子元素发生折叠。 */
+        }
+
+        div.inner {
+            width: 100px;
+            height: 100px;
+            margin-top: 100px;
+            background: #F4828C;
+            box-sizing: border-box;
+        }
+        .down-wrapper {
+            overflow: hidden;
+            /*margin-top: 100px;*/
+        }
+    </style>
+</head>
+<body>
+<div class="all">
+    <!-- 什么时候会崩塌, 两个或多个毗邻的普通流中的块元素垂直方向上的 margin 会折叠 -->
+    <!-- 关键词「两个或多个」「毗邻」「块元素<垂直>方向」 -->
+    <!-- 折叠后的大小：全为正书或负数, 取绝对值最大的；一正一负取和 -->
+    <div class="up"></div>
+    <div class="down-wrapper">
+        <div class="down"></div>
+    </div>
+    <!-- div.up 和 div.down 互为兄弟元素（毗邻）, 即使不在同一BFC中, 也会发生折叠。元素形成BFC之后只能避免父块级元素与其子块级元素发生折叠。 -->
+    <div class="outter">
+        <div class="inner"></div>
+    </div>
+    <!-- outter与inner是父子关系, 再次强调outter形成BFC只可避免与子发生折叠, 但其子元素之间可能会发生折叠。 -->
+</div>
+</body>
+</html>

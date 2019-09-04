@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // 正常请求ajax
+    // let xhr = new XMLHttpRequest()
+    // xhr.open('put', 'http://localhost:8887', true)
+    // xhr.send()
+    // window.addEventListener("message", function(e){
+    //
+    // })
+    //jsonp
+    let script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = `http://127.0.0.1:8887/?callback=cb`;
+    document.head.appendChild(script);
+    console.log("1")
+    function cb (res) {
+        console.log(res);
+        // 请求完后删除添加到页面上的script标签
+        var head = document.head
+        head.removeChild(script)
+    }
+</script>
+</body>
+</html>
