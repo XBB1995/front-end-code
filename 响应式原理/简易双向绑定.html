@@ -35,6 +35,24 @@
     //     data.name = e.target.value
     // })
 
+    // data = {}
+    // Object.keys(data).forEach(key=>{
+    //     Object.defineProperty(data, key, {
+    //         get: function(){
+    //              console.log(`get ${key}`)
+    //         },
+    //         set: function(val) {
+    //             console.log(`set ${key}`)
+    //             inp.value = val
+    //             p.innerHTML = val
+    //         }
+    //     })
+    // })
+    // // 第三个参数 默认false 冒泡！
+    // inp.addEventListener('keyup', function(e){
+    //     data.name = e.target.value
+    // },false)
+
     // Proxy
     const input = document.getElementById('inp');
     const p = document.getElementById('p1');
@@ -47,6 +65,7 @@
     const newObj = new Proxy(obj, {
         get: function(target, key, receiver) {
             // console.log(`getting ${key}!`);
+            console.log(target)
             return Reflect.get(target, key, receiver);
         },
         set: function(target, key, value, receiver) {
@@ -57,6 +76,19 @@
             return Reflect.set(target, key, value, receiver);
         },
     });
+
+    // const newObj = new Proxy(obj, {
+    //     get: function(target, key, receiver) {
+    //         return Reflect.get(target, key, receiver)
+    //     },
+    //     set: function(target,key,value,receiver){
+    //         if(key === 'text') {
+    //             input.value = value
+    //             p.innerHTML = value
+    //         }
+    //         return Reflect.set(target, key, value, receiver)
+    //     }
+    // })
 
     input.addEventListener('keyup', function(e) {
         newObj.text = e.target.value;

@@ -29,6 +29,8 @@
             }
         }
     }
+    // 设置携带cookie 需要后端ACAC配合 才能跨域携带cookie
+    xhr.withCredentials = true
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
     xhr.send(transformData(data))
 })()

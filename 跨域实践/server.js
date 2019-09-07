@@ -13,14 +13,18 @@
 // JSONP
 var http = require('http')
 // json 数据
-var data = {'methods': 'jsonp', 'result': 'success'};
+var data = {
+    'methods': 'jsonp',
+    'result': 'success'
+};
 
 http.createServer(function (request, response) {
     let url = request.url;
     let callback = url.split("=")[1]
 
     response.writeHead(200, {
-        'Content-Type': 'text/plain'
+        'Content-Type': 'text/plain',
+        'Set-Cookie': 'name=XBB;Path=/;Domain=somecompany.co.uk;Secure;id=1;HttpOnly'
     });
     var str = `${callback}(${JSON.stringify(data)})`
 
